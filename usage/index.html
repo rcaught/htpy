@@ -973,15 +973,22 @@ React.</p>
 define the type and optional default value of a context variable.</li>
 <li>Using <code>my_context.provider(value, lambda: children)</code> to set the value of a context variable for a subtree.</li>
 <li>Adding the <code>@my_context.consumer</code> decorator to a component that requires the
-context value. The decorator will add the context value as the first argument to the decorated function.</li>
+context value. The decorator will add the context value as the first argument to the decorated function:</li>
 </ul>
-<p>A context value can be passed arbitrarily deep between components. It is
-possible to nest multiple context provider and different values can be used in
-different subtrees.</p>
 <p>The <code>Context</code> class is a generic and fully supports static type checking.</p>
 <p>The values are passed as part of the tree used to render components without
 using global state. It is safe to use contexts for lazy constructs such as
 callables and generators.</p>
+<p>A context value can be passed arbitrarily deep between components. It is
+possible to nest multiple context provider and different values can be used in
+different subtrees.</p>
+<p>A single component can consume as many contexts as possible by using multiple
+decorators:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="nd">@context_b</span><span class="o">.</span><span class="n">consumer</span>
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="nd">@context_a</span><span class="o">.</span><span class="n">consumer</span>
+</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="k">def</span> <span class="nf">my_component</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+</span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>    <span class="o">...</span>
+</span></code></pre></div>
 <h3 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h3>
 <p>This example shows how context can be used to pass data between components:</p>
 <ul>
@@ -997,34 +1004,34 @@ component function.</li>
 <li>In this example, a <code>Theme</code> type is used to ensure that the correct types are
 used when providing the value as well as when it is consumed.</li>
 </ul>
-<div class="language-py highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Literal</span>
-</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>
-</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="kn">from</span> <span class="nn">htpy</span> <span class="kn">import</span> <span class="n">Context</span><span class="p">,</span> <span class="n">Node</span><span class="p">,</span> <span class="n">div</span><span class="p">,</span> <span class="n">h1</span>
-</span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>
-</span><span id="__span-31-5"><a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="n">Theme</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;light&quot;</span><span class="p">,</span> <span class="s2">&quot;dark&quot;</span><span class="p">]</span>
-</span><span id="__span-31-6"><a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a>
-</span><span id="__span-31-7"><a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a><span class="n">theme_context</span><span class="p">:</span> <span class="n">Context</span><span class="p">[</span><span class="n">Theme</span><span class="p">]</span> <span class="o">=</span> <span class="n">Context</span><span class="p">(</span><span class="s2">&quot;theme&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;light&quot;</span><span class="p">)</span>
-</span><span id="__span-31-8"><a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a>
-</span><span id="__span-31-9"><a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a>
-</span><span id="__span-31-10"><a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a><span class="k">def</span> <span class="nf">my_page</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Node</span><span class="p">:</span>
-</span><span id="__span-31-11"><a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a>    <span class="k">return</span> <span class="n">theme_context</span><span class="o">.</span><span class="n">provider</span><span class="p">(</span>
-</span><span id="__span-31-12"><a id="__codelineno-31-12" name="__codelineno-31-12" href="#__codelineno-31-12"></a>        <span class="s2">&quot;dark&quot;</span><span class="p">,</span>
-</span><span id="__span-31-13"><a id="__codelineno-31-13" name="__codelineno-31-13" href="#__codelineno-31-13"></a>        <span class="k">lambda</span><span class="p">:</span> <span class="n">div</span><span class="p">[</span>
-</span><span id="__span-31-14"><a id="__codelineno-31-14" name="__codelineno-31-14" href="#__codelineno-31-14"></a>            <span class="n">h1</span><span class="p">[</span><span class="s2">&quot;Hello!&quot;</span><span class="p">],</span>
-</span><span id="__span-31-15"><a id="__codelineno-31-15" name="__codelineno-31-15" href="#__codelineno-31-15"></a>            <span class="n">sidebar</span><span class="p">(</span><span class="s2">&quot;The Sidebar!&quot;</span><span class="p">),</span>
-</span><span id="__span-31-16"><a id="__codelineno-31-16" name="__codelineno-31-16" href="#__codelineno-31-16"></a>        <span class="p">],</span>
-</span><span id="__span-31-17"><a id="__codelineno-31-17" name="__codelineno-31-17" href="#__codelineno-31-17"></a>    <span class="p">)</span>
-</span><span id="__span-31-18"><a id="__codelineno-31-18" name="__codelineno-31-18" href="#__codelineno-31-18"></a>
-</span><span id="__span-31-19"><a id="__codelineno-31-19" name="__codelineno-31-19" href="#__codelineno-31-19"></a>
-</span><span id="__span-31-20"><a id="__codelineno-31-20" name="__codelineno-31-20" href="#__codelineno-31-20"></a><span class="nd">@theme_context</span><span class="o">.</span><span class="n">consumer</span>
-</span><span id="__span-31-21"><a id="__codelineno-31-21" name="__codelineno-31-21" href="#__codelineno-31-21"></a><span class="k">def</span> <span class="nf">sidebar</span><span class="p">(</span><span class="n">theme</span><span class="p">:</span> <span class="n">Theme</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Node</span><span class="p">:</span>
-</span><span id="__span-31-22"><a id="__codelineno-31-22" name="__codelineno-31-22" href="#__codelineno-31-22"></a>    <span class="k">return</span> <span class="n">div</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;theme-</span><span class="si">{</span><span class="n">theme</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)[</span><span class="n">title</span><span class="p">]</span>
-</span><span id="__span-31-23"><a id="__codelineno-31-23" name="__codelineno-31-23" href="#__codelineno-31-23"></a>
-</span><span id="__span-31-24"><a id="__codelineno-31-24" name="__codelineno-31-24" href="#__codelineno-31-24"></a>
-</span><span id="__span-31-25"><a id="__codelineno-31-25" name="__codelineno-31-25" href="#__codelineno-31-25"></a><span class="nb">print</span><span class="p">(</span><span class="n">my_page</span><span class="p">())</span>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Literal</span>
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>
+</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="kn">from</span> <span class="nn">htpy</span> <span class="kn">import</span> <span class="n">Context</span><span class="p">,</span> <span class="n">Node</span><span class="p">,</span> <span class="n">div</span><span class="p">,</span> <span class="n">h1</span>
+</span><span id="__span-32-4"><a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>
+</span><span id="__span-32-5"><a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="n">Theme</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;light&quot;</span><span class="p">,</span> <span class="s2">&quot;dark&quot;</span><span class="p">]</span>
+</span><span id="__span-32-6"><a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a>
+</span><span id="__span-32-7"><a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="n">theme_context</span><span class="p">:</span> <span class="n">Context</span><span class="p">[</span><span class="n">Theme</span><span class="p">]</span> <span class="o">=</span> <span class="n">Context</span><span class="p">(</span><span class="s2">&quot;theme&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;light&quot;</span><span class="p">)</span>
+</span><span id="__span-32-8"><a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a>
+</span><span id="__span-32-9"><a id="__codelineno-32-9" name="__codelineno-32-9" href="#__codelineno-32-9"></a>
+</span><span id="__span-32-10"><a id="__codelineno-32-10" name="__codelineno-32-10" href="#__codelineno-32-10"></a><span class="k">def</span> <span class="nf">my_page</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Node</span><span class="p">:</span>
+</span><span id="__span-32-11"><a id="__codelineno-32-11" name="__codelineno-32-11" href="#__codelineno-32-11"></a>    <span class="k">return</span> <span class="n">theme_context</span><span class="o">.</span><span class="n">provider</span><span class="p">(</span>
+</span><span id="__span-32-12"><a id="__codelineno-32-12" name="__codelineno-32-12" href="#__codelineno-32-12"></a>        <span class="s2">&quot;dark&quot;</span><span class="p">,</span>
+</span><span id="__span-32-13"><a id="__codelineno-32-13" name="__codelineno-32-13" href="#__codelineno-32-13"></a>        <span class="k">lambda</span><span class="p">:</span> <span class="n">div</span><span class="p">[</span>
+</span><span id="__span-32-14"><a id="__codelineno-32-14" name="__codelineno-32-14" href="#__codelineno-32-14"></a>            <span class="n">h1</span><span class="p">[</span><span class="s2">&quot;Hello!&quot;</span><span class="p">],</span>
+</span><span id="__span-32-15"><a id="__codelineno-32-15" name="__codelineno-32-15" href="#__codelineno-32-15"></a>            <span class="n">sidebar</span><span class="p">(</span><span class="s2">&quot;The Sidebar!&quot;</span><span class="p">),</span>
+</span><span id="__span-32-16"><a id="__codelineno-32-16" name="__codelineno-32-16" href="#__codelineno-32-16"></a>        <span class="p">],</span>
+</span><span id="__span-32-17"><a id="__codelineno-32-17" name="__codelineno-32-17" href="#__codelineno-32-17"></a>    <span class="p">)</span>
+</span><span id="__span-32-18"><a id="__codelineno-32-18" name="__codelineno-32-18" href="#__codelineno-32-18"></a>
+</span><span id="__span-32-19"><a id="__codelineno-32-19" name="__codelineno-32-19" href="#__codelineno-32-19"></a>
+</span><span id="__span-32-20"><a id="__codelineno-32-20" name="__codelineno-32-20" href="#__codelineno-32-20"></a><span class="nd">@theme_context</span><span class="o">.</span><span class="n">consumer</span>
+</span><span id="__span-32-21"><a id="__codelineno-32-21" name="__codelineno-32-21" href="#__codelineno-32-21"></a><span class="k">def</span> <span class="nf">sidebar</span><span class="p">(</span><span class="n">theme</span><span class="p">:</span> <span class="n">Theme</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Node</span><span class="p">:</span>
+</span><span id="__span-32-22"><a id="__codelineno-32-22" name="__codelineno-32-22" href="#__codelineno-32-22"></a>    <span class="k">return</span> <span class="n">div</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;theme-</span><span class="si">{</span><span class="n">theme</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)[</span><span class="n">title</span><span class="p">]</span>
+</span><span id="__span-32-23"><a id="__codelineno-32-23" name="__codelineno-32-23" href="#__codelineno-32-23"></a>
+</span><span id="__span-32-24"><a id="__codelineno-32-24" name="__codelineno-32-24" href="#__codelineno-32-24"></a>
+</span><span id="__span-32-25"><a id="__codelineno-32-25" name="__codelineno-32-25" href="#__codelineno-32-25"></a><span class="nb">print</span><span class="p">(</span><span class="n">my_page</span><span class="p">())</span>
 </span></code></pre></div>
 <p>Output:</p>
-<div class="language-html highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Hello!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;theme-dark&quot;</span><span class="p">&gt;</span>The Sidebar!<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Hello!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;theme-dark&quot;</span><span class="p">&gt;</span>The Sidebar!<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </span></code></pre></div>
 
 
