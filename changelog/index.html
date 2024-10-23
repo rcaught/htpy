@@ -469,6 +469,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#24100-2024-10-23" class="md-nav__link">
+    <span class="md-ellipsis">
+      24.10.0 - 2024-10-23
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#2491-2024-09-09" class="md-nav__link">
     <span class="md-ellipsis">
       24.9.1 - 2024-09-09
@@ -540,6 +549,15 @@
 
 
 <h1 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">&para;</a></h1>
+<h2 id="24100-2024-10-23">24.10.0 - 2024-10-23<a class="headerlink" href="#24100-2024-10-23" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Implement <code>Element.__html__</code>. This avoids double escaping when passed to
+<code>markupsafe.escape</code> and Django's <code>django.utils.html.conditional_escape</code>. <a href="https://github.com/pelme/htpy/pull/65">PR #65</a>.</li>
+<li>Raise errors directly on invalid children. This avoids cryptic stack traces.
+<a href="https://github.com/pelme/htpy/pull/56">PR #56</a>.</li>
+<li>Raise TypeError rather than ValueError when invalid types are passed as
+attributes or children. <a href="https://github.com/pelme/htpy/pull/59">PR #59</a>.</li>
+</ul>
 <h2 id="2491-2024-09-09">24.9.1 - 2024-09-09<a class="headerlink" href="#2491-2024-09-09" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Raise errors directly on invalid attributes. This avoids cryptic stack traces
