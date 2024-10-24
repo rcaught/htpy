@@ -789,7 +789,7 @@ more information.</p>
 <h3 id="custom-elements-web-components">Custom Elements / Web Components<a class="headerlink" href="#custom-elements-web-components" title="Permanent link">&para;</a></h3>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements">Custom elements / web
 components</a>
-are HTML elements that contains at least one dash (<code>-</code>). Since <code>-</code> cannot be
+are HTML elements that contain at least one dash (<code>-</code>). Since <code>-</code> cannot be
 used in Python identifiers, use underscore (<code>_</code>) instead:</p>
 <div class="language-pycon highlight"><span class="filename">Using custom elements</span><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">htpy</span> <span class="kn">import</span> <span class="n">my_custom_element</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">my_custom_element</span><span class="p">[</span><span class="s1">&#39;hi!&#39;</span><span class="p">])</span>
@@ -804,7 +804,8 @@ library. markupsafe is a dependency of htpy and is automatically installed:</p>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">div</span><span class="p">[</span><span class="n">Markup</span><span class="p">(</span><span class="s2">&quot;&lt;foo&gt;&lt;/foo&gt;&quot;</span><span class="p">)])</span>
 </span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="go">&lt;div&gt;&lt;foo&gt;&lt;/foo&gt;&lt;/div&gt;</span>
 </span></code></pre></div>
-<p>If you are generate <a href="https://pypi.org/project/Markdown/">Markdown</a> and want to insert it into an element, use <code>Markup</code>:</p>
+<p>If you are generating <a href="https://pypi.org/project/Markdown/">Markdown</a> and want to insert it into an element, 
+use <code>Markup</code> to mark it as safe:</p>
 <div class="language-pycon highlight"><span class="filename">Injecting generated markdown</span><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">markdown</span> <span class="kn">import</span> <span class="n">markdown</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">markupsafe</span> <span class="kn">import</span> <span class="n">Markup</span>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">htpy</span> <span class="kn">import</span> <span class="n">div</span>
@@ -849,7 +850,7 @@ Markup</a> section above for details.</p>
 </span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">label</span><span class="p">(</span><span class="n">for_</span><span class="o">=</span><span class="s2">&quot;myfield&quot;</span><span class="p">))</span>
 </span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="go">&lt;label for=&quot;myfield&quot;&gt;&lt;/label&gt;</span>
 </span></code></pre></div>
-<p>Attributes that contains dashes <code>-</code> can be specified using underscores:</p>
+<p>Attributes that contain dashes <code>-</code> can be specified using underscores:</p>
 <div class="language-pycon highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">htpy</span> <span class="kn">import</span> <span class="n">form</span>
 </span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">form</span><span class="p">(</span><span class="n">hx_post</span><span class="o">=</span><span class="s2">&quot;/foo&quot;</span><span class="p">))</span>
 </span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="go">&lt;form hx-post=&quot;/foo&quot;&gt;&lt;/form&gt;</span>
@@ -909,7 +910,7 @@ accepts a list of class names or a dict. Falsey values will be ignored.</p>
 </span></code></pre></div>
 <h3 id="combining-modes">Combining Modes<a class="headerlink" href="#combining-modes" title="Permanent link">&para;</a></h3>
 <p>Attributes via id/class shorthand, keyword arguments and dictionary can be combined:</p>
-<div class="language-pycon highlight"><span class="filename">Specifying attribute via multiple arguments</span><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">htyp</span> <span class="kn">import</span> <span class="n">label</span>
+<div class="language-pycon highlight"><span class="filename">Specifying attribute via multiple arguments</span><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">htpy</span> <span class="kn">import</span> <span class="n">label</span>
 </span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">label</span><span class="p">(</span><span class="s2">&quot;#myid.foo.bar&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;for&#39;</span><span class="p">:</span> <span class="s2">&quot;somefield&quot;</span><span class="p">},</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;myname&quot;</span><span class="p">,))</span>
 </span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="go">&lt;label id=&quot;myid&quot; class=&quot;foo bar&quot; for=&quot;somefield&quot; name=&quot;myname&quot;&gt;&lt;/label&gt;</span>
 </span></code></pre></div>
@@ -971,16 +972,16 @@ they are rendered:</p>
 <p>Just like <a href="#render-elements-without-a-parent-orphans">render_node()</a>, there is
 <code>iter_node()</code> that can be used when you need to iterate over a list of elements
 without a parent:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>&gt;&gt;&gt; from htpy import li, iter_node
-</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>&gt;&gt;&gt; for chunk in iter_node([li[&quot;a&quot;], li[&quot;b&quot;]]):
-</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>...     print(f&quot;got a chunk: {chunk!r}&quot;)
-</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>...
-</span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>got a chunk: &#39;&lt;li&gt;&#39;
-</span><span id="__span-30-6"><a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a>got a chunk: &#39;a&#39;
-</span><span id="__span-30-7"><a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a>got a chunk: &#39;&lt;/li&gt;&#39;
-</span><span id="__span-30-8"><a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a>got a chunk: &#39;&lt;li&gt;&#39;
-</span><span id="__span-30-9"><a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a>got a chunk: &#39;b&#39;
-</span><span id="__span-30-10"><a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a>got a chunk: &#39;&lt;/li&gt;&#39;
+<div class="language-pycon highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">htpy</span> <span class="kn">import</span> <span class="n">li</span><span class="p">,</span> <span class="n">iter_node</span>
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">iter_node</span><span class="p">([</span><span class="n">li</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">],</span> <span class="n">li</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]]):</span>
+</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;got a chunk: </span><span class="si">{</span><span class="n">chunk</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="gp">...</span>
+</span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="go">got a chunk: &#39;&lt;li&gt;&#39;</span>
+</span><span id="__span-30-6"><a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a><span class="go">got a chunk: &#39;a&#39;</span>
+</span><span id="__span-30-7"><a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a><span class="go">got a chunk: &#39;&lt;/li&gt;&#39;</span>
+</span><span id="__span-30-8"><a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a><span class="go">got a chunk: &#39;&lt;li&gt;&#39;</span>
+</span><span id="__span-30-9"><a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a><span class="go">got a chunk: &#39;b&#39;</span>
+</span><span id="__span-30-10"><a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a><span class="go">got a chunk: &#39;&lt;/li&gt;&#39;</span>
 </span></code></pre></div>
 <h2 id="passing-data-with-context">Passing Data with Context<a class="headerlink" href="#passing-data-with-context" title="Permanent link">&para;</a></h2>
 <p>Usually, you pass data via regular function calls and arguments via your
