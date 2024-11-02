@@ -6,7 +6,7 @@ The performance of HTML rendering is rarely the bottleneck in most web applicati
 
 Given that it has been fast enough, there has not been much effort in optimizing htpy. It should be possible to significantly increase the effectiveness and we are open to contributions with benchmarks and speed improvements.
 
-That said, htpy is currently on par with Django templates when it comes to speed. Jinja2 is currently significantly faster than both Django templates and htpy. There is a [small benchmark script](https://github.com/pelme/htpy/blob/855a2a6648ce955be9730fe030a97930df42930a/scripts/benchmark_big_table.py) in the repo that generates a table with 50 000 rows.
+That said, htpy is currently on par with Django templates when it comes to speed. Jinja2 is currently significantly faster than both Django templates and htpy. There are [benchmark tests](https://github.com/pelme/htpy/blob/main/tests/test_benchmark.py) in the repo that generate tables with 50,000 rows. They can be run with `pytest --benchmark-enable tests/test_benchmark.py`.
 
 ## Can htpy generate XML/XHTML?
 

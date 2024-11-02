@@ -33,6 +33,7 @@ optional-dependencies.dev = [
     "jinja2",
     "starlette",
     "httpx",
+    "pytest-benchmark"
 ]
 optional-dependencies.docs = [
     "mkdocs-material==9.5.12",
@@ -80,3 +81,7 @@ exclude = ["examples", "scripts"]
 [tool.pyright]
 include = ["htpy", "tests"]
 strict = ["htpy", "tests"]
+
+[tool.pytest.ini_options]
+addopts = "--benchmark-disable --color=yes"
+markers = ["third_party"]
