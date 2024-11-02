@@ -19,7 +19,7 @@ classifiers = [
     "Operating System :: OS Independent",
     "Typing :: Typed",
 ]
-# Install with pip install .[dev]
+# Install with pip install ".[dev]"
 optional-dependencies.dev = [
     "pre-commit",
     "flit",

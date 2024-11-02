@@ -14,7 +14,7 @@ jobs:
         with:
           python-version: "3.13"
           cache: pip
-      - run: pip install .[dev]
+      - run: pip install ".[dev]"
       - run: pre-commit run --all-files
 
   pytest:
@@ -28,7 +28,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
-      - run: pip install .[dev]
+      - run: pip install ".[dev]"
       - run: pytest
 
   mypy:
@@ -42,7 +42,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
-      - run: pip install .[dev]
+      - run: pip install ".[dev]"
       - run: mypy
 
   pyright:
@@ -56,5 +56,5 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
-      - run: pip install .[dev]
+      - run: pip install ".[dev]"
       - run: pyright
