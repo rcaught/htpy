@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow
+
+name: Benchmark Alternatives
+on:
+  push:
+    branches: [main]
+
+jobs:
+  benchmark_alternatives:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
+
+    steps:
+      - uses: _common.yml
+      - name: Run benchmarks and profiling
+        run: pytest --benchmark-enable tests/test_benchmark.py
